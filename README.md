@@ -33,7 +33,7 @@ Before running the application, make sure you have the following prerequisites i
 - Clone the repository :
 
 ```bash
-git clone https://github.com/your-username/hardware-store.git
+git clone https://github.com/sasankaweera123/Hardware_Store_API.git
 ```
 - Open the project in your favorite Java IDE.
 - Update the MongoDB configuration in the `application.properties` file located in the `src/main/resources` directory :
