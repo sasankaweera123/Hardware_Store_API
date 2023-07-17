@@ -34,6 +34,12 @@ public class CategoryService {
         if (exists){
             throw new IllegalStateException("Category with id " + category.getCategoryId() + " already exists");
         }
+        if (category.getCategoryId() == null || category.getCategoryId().length() == 0){
+            throw new IllegalStateException("Category id cannot be empty");
+        }
+        if (category.getCategoryId().length() != 5){
+            throw new IllegalStateException("Category id must be 5 characters long");
+        }
         categoryRepository.save(category);
     }
 
@@ -45,6 +51,8 @@ public class CategoryService {
         if(category.getCategoryId() != null && category.getCategoryId().length() > 0 && !category.getCategoryId().equals(categoryId)){
             throw new IllegalStateException("Category id cannot be changed");
         }
-        categoryRepository.save(category);
+        Category existingCategory = categoryRepository.findByCategoryId(categoryId).orElseThrow(() -> new IllegalStateException("Category with id " + categoryId + " does not exist"));
+        existingCategory.setName(category.getName());
+        categoryRepository.save(existingCategory);
     }
 }

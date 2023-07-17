@@ -34,6 +34,9 @@ public class StoreService {
         if (exists){
             throw new IllegalStateException("Store with id " + store.getStoreId() + " already exists");
         }
+        if(store.getStoreId().length()!=5) {
+            throw new IllegalStateException("Store id must be 5 characters long");
+        }
         storeRepository.save(store);
     }
 
@@ -45,6 +48,8 @@ public class StoreService {
         if(store.getStoreId() != null && store.getStoreId().length() > 0 && !store.getStoreId().equals(storeId)){
             throw new IllegalStateException("Store id cannot be changed");
         }
-        storeRepository.save(store);
+        Store existingStore = storeRepository.findByStoreId(storeId).orElseThrow(() -> new IllegalStateException("Store with id " + storeId + " does not exist"));
+        existingStore.setName(store.getName());
+        storeRepository.save(existingStore);
     }
 }
