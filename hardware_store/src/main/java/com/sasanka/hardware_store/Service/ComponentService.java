@@ -34,6 +34,9 @@ public class ComponentService {
         if (exists){
             throw new IllegalStateException("Component with id " + component.getComponentId() + " already exists");
         }
+        if(component.getComponentId().length()!=5) {
+            throw new IllegalStateException("Component id must be 5 characters long");
+        }
         componentRepository.save(component);
     }
 
@@ -45,6 +48,25 @@ public class ComponentService {
         if(component.getComponentId() != null && component.getComponentId().length() > 0 && !component.getComponentId().equals(componentId)){
             throw new IllegalStateException("Component id cannot be changed");
         }
-        componentRepository.save(component);
+        Component existingComponent = componentRepository.findByComponentId(componentId).orElseThrow(() -> new IllegalStateException("Component with id " + componentId + " does not exist"));
+        if(component.getName() != null && component.getName().length() > 0)
+            existingComponent.setName(component.getName());
+        if(component.getDescription() != null && component.getDescription().length() > 0)
+            existingComponent.setDescription(component.getDescription());
+        if(component.getImageUrl() != null && component.getImageUrl().length() > 0)
+            existingComponent.setImageUrl(component.getImageUrl());
+        if(component.getCategory()!=null)
+            existingComponent.setCategory(component.getCategory());
+        if(component.getConnect()!=null)
+            existingComponent.setConnect(component.getConnect());
+        if(component.getTheory()!=null)
+            existingComponent.setTheory(component.getTheory());
+        if(component.getFeatures() !=null)
+            existingComponent.setFeatures(component.getFeatures());
+        if(component.getStatistics() !=null)
+            existingComponent.setStatistics(component.getStatistics());
+        if(component.getStores()!=null)
+            existingComponent.setStores(component.getStores());
+        componentRepository.save(existingComponent);
     }
 }
