@@ -49,7 +49,10 @@ public class StoreService {
             throw new IllegalStateException("Store id cannot be changed");
         }
         Store existingStore = storeRepository.findByStoreId(storeId).orElseThrow(() -> new IllegalStateException("Store with id " + storeId + " does not exist"));
-        existingStore.setName(store.getName());
+        if(store.getName() != null && store.getName().length() > 0)
+            existingStore.setName(store.getName());
+        if(store.getMapUrl()!=null && store.getMapUrl().length()>0)
+            existingStore.setMapUrl(store.getMapUrl());
         storeRepository.save(existingStore);
     }
 }
