@@ -16,9 +16,11 @@ public class Store {
     private String storeId;
 
     private String name;
+    private String mapUrl;
 
-    public Store(String storeId ,String name) {
+public Store(String storeId, String name, String mapUrl) {
         this.storeId = storeId;
         this.name = name;
+        this.mapUrl = mapUrl;
     }
 }
