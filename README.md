@@ -87,6 +87,7 @@ The Hardware Store Application exposes various API endpoints for managing compon
 - `GET /api/v1/category/all`: Fetch all categories.
 - `GET /api/v1/category/{categoryId}`: Fetch a specific category by ID.
 
+
 ## Contributing
 
 Contributions to this project are welcome. You can fork the repository, make changes, and submit a pull request. Please make sure to follow the existing code style and conventions.
