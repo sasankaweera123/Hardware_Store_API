@@ -1,75 +1,92 @@
 # Hardware_Store_API
 
-This is a sample project for a hardware store application built using Spring Boot and MongoDB. The application allows users to manage components available in the hardware store.
+The Hardware Store Application is a web-based system that helps manage hardware components, stores, customer reviews, and categories related to a hardware store. It provides functionalities to add, update, delete, and fetch information about components, stores, customer reviews, and categories.
 
-```java
-String componentId = "C0001";
-Component component = new Component(
-  componentId,
-  "Light Sensor",
-  "Light sensor module is used to detect the intensity of light. It has both analog output pin and digital output pin labeled as AO and DO respectively on the board. This sensor module is designed to detect and measure various physical properties, such as temperature, humidity, pressure, light intensity and more.",
-  "Sensor",
-  "https://raw.githubusercontent.com/RPSTD/component101/main/LightSensor/IMG/IMG.png",
-  List.of("Connect the LDR to the analog input pin 0 on the Arduino board.", "Connect the VCC leg on the sensor to the 5V pin of the Arduino board.", "Connect the GRD leg on the sensor to the GND pin of the Arduino board.", "A connection diagram is provided to illustrate the connections."),
-  List.of("When there is light, the resistance of LDR becomes low according to the intensity of light.","This means when the light level decreases, the resistance of the LDR increases.", "The resistance of LDR is inversely proportional to the intensity of light.","Light sensors are a type of photodetector (also called photosensor) that detect light.","Different types of light sensors can be used to measure illuminance, respond to changes in the amount of light received, or convert light to electricity."),
-  List.of("The light sensor module has both analog and digital output pins.","It can be used to detect the intensity of light.","The sensitivity of the sensor can be adjusted using a potentiometer."),
-  List.of("The working voltage of the light sensor module is between 3.3V and 5V DC.","The detection angle is about 60 degrees.","The sensor can detect light intensity ranging from 500 to 10,000 lux.")
-);
+Custom Response:
+
+```JSON
+{
+  "timestamp": "2023-07-21T11:02:29.5116472",
+  "statusCode": 200,
+  "status": "OK",
+  "message": "Stores fetched successfully",
+  "data": {}
+}
 ```
 
-Can Acess component based on 
-```java
-Optional<Component> findByComponentId(String componentId);
-```
+## Features
 
-## Prerequisites
-Before running the application, make sure you have the following prerequisites installed on your system:
+- View all hardware components, stores, customer reviews, and categories.
+- Fetch information about a specific component, store, customer review, or category by ID.
+- Add new hardware components, stores, customer reviews, and categories.
+- Update existing hardware components, stores, customer reviews, and categories.
+- Delete hardware components, stores, customer reviews, and categories by ID.
 
-- Java Development Kit (JDK) 8 or later
-- MongoDB
+## Technology Stack
 
-## Getting Started
+The Hardware Store Application is built using the following technology stack:
 
-- Clone the repository :
+- Java
+- Spring Boot
+- Spring Data MongoDB
+- MongoDB (as the database)
+- Lombok (for code simplification)
+- JSON (for data exchange)
 
-```bash
-git clone https://github.com/sasankaweera123/Hardware_Store_API.git
-```
-- Open the project in your favorite Java IDE.
-- Update the MongoDB configuration in the `application.properties` file located in the `src/main/resources` directory :
+## Setup and Run
 
-```properties
-spring.data.mongodb.authentication-database=admin
-spring.data.mongodb.username=rootuser
-spring.data.mongodb.password=rotpass
-spring.data.mongodb.database=springboot
-spring.data.mongodb.port=27017
-spring.data.mongodb.host=localhost
-spring.data.mongodb.auto-index-creation=true
-```
-Make sure to replace the values with your actual MongoDB configuration.
-- Build the project using Maven or your IDE's build functionality.
-- Run the application. This can be done by executing the `main` method in the `Application` class or using your IDE's run configuration.
-- Once the application is running, you can access the API endpoints using a REST client or a browser.
+1. **Prerequisites**: Ensure you have Java JDK, Maven, and MongoDB installed on your system.
+
+    ```xml
+   <java.version>17</java.version>
+    ```
+   
+2. **Clone the Repository**: Clone this repository to your local machine.
+
+   ```git
+   git clone https://github.com/sasankaweera123/Hardware_Store_API.git
+   ```
+   
+3. **Database Configuration**: Ensure that your MongoDB is up and running. The application expects MongoDB to be available at `localhost:27017` by default. If your MongoDB instance is running on a different port or host, modify the `application.properties` file accordingly.
+
+    ```properties
+    spring.data.mongodb.authentication-database=${auth_db}
+    spring.data.mongodb.username=${db_user}
+    spring.data.mongodb.password=${db_pass}
+    spring.data.mongodb.database=${db_name}
+    spring.data.mongodb.port=27017
+    spring.data.mongodb.host=${db_host}
+    
+    spring.data.mongodb.auto-index-creation=true
+    ```
+
+4. **Build and Run the Application**:
+    - Navigate to the root folder of the cloned repository.
+    - Run the following command to build the application: `mvn clean install`
+    - After the build is successful, run the application using: `mvn spring-boot:run`
+
+5. **Accessing the Application**: The application should now be up and running. You can access the API endpoints using tools like Postman or any web browser.
+
 
 ## API Endpoints
 
-The following API endpoints are available:
+The Hardware Store Application exposes various API endpoints for managing components, stores, customer reviews, and categories. Below are some of the main endpoints:
 
-- GET
-   - `/api/v1/component/all` : Retrieves all components.
-   - `/api/v1/component/{componentId}` : Retrieves a component by its ID.
-- POST
-  - `/api/v1/component` : Adds a new component.
-- DELETE
-  - `/api/v1/component/{componentId}`: Deletes a component by its ID.
-- PUT
-  - `/api/v1/component/{componentId}`: Updates a component by its ID.
- 
-#### Includes the following additional configurations:
+- `GET /api/v1/component/all`: Fetch all hardware components.
+- `GET /api/v1/component/{componentId}`: Fetch a specific component by ID.
+- `POST /api/v1/component`: Add a new hardware component.
+- `PUT /api/v1/component/{componentId}`: Update an existing hardware component.
+- `DELETE /api/v1/component/{componentId}`: Delete a hardware component by ID.
+- `GET /api/v1/store/all`: Fetch all stores.
+- `GET /api/v1/store/{storeId}`: Fetch a specific store by ID.
+- `GET /api/v1/customer_review/all`: Fetch all customer reviews.
+- `GET /api/v1/customer_review/{customerReviewId}`: Fetch a specific customer review by ID.
+- `POST /api/v1/customer_review`: Add a new customer review.
+- `PUT /api/v1/customer_review/{customerReviewId}`: Update an existing customer review.
+- `DELETE /api/v1/customer_review/{customerReviewId}`: Delete a customer review by ID.
+- `GET /api/v1/category/all`: Fetch all categories.
+- `GET /api/v1/category/{categoryId}`: Fetch a specific category by ID.
 
-- **CommandLineRunner** : This bean is used to insert sample data into the database when the application starts. It retrieves the `ComponentRepository` bean and saves a sample component if it doesn't already exist.
-- **WebMvcConfigurer** : This bean is used to configure Cross-Origin Resource Sharing (CORS) to allow requests from different origins. It enables all methods, headers, and origins using the `addCorsMappings` method.
 
 ## Contributing
 
