@@ -2,6 +2,18 @@
 
 The Hardware Store Application is a web-based system that helps manage hardware components, stores, customer reviews, and categories related to a hardware store. It provides functionalities to add, update, delete, and fetch information about components, stores, customer reviews, and categories.
 
+Custom Response:
+
+```JSON
+{
+  "timestamp": "2023-07-21T11:02:29.5116472",
+  "statusCode": 200,
+  "status": "OK",
+  "message": "Stores fetched successfully",
+  "data": {}
+}
+```
+
 ## Features
 
 - View all hardware components, stores, customer reviews, and categories.
