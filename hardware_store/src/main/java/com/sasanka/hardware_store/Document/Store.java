@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Store {
 
     @Id
-    private String Id;
+    private String id;
 
     @Indexed(unique = true)
     private String storeId;
